@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Restaurant Délice | Luxe & Saveurs</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <title>Restaurant Argana | Luxe & Saveurs</title>
         <style>
+            /* On definit les couleurs principale pour les réutiliser facilement partout au code*/
             :root{
                 --primary: #ffcc00;
                 --dark: #0a0a0a;
@@ -138,23 +138,25 @@
             .gal img:hover {
                 filter: grayscale(0);
                 transform: scale(1.1);
+            }
         </style>
     </head>
     <body>
         <nav>
-            <div class="logo">DÉLICE <span style="color:white">RESTAURANT</span></div>
+            <div class="logo">Argana <span style="color:white">RESTAURANT</span></div>
             <ul class="nav-links">
                 <li><a href="#home">Accueil</a></li>
                 <li><a href="#menu">Menu</a></li>
                 <li><a href="#gallery">Galerie</a></li>
                 <li><a href="#reviews">Avis</a></li>
                 <li><a href="#reservation">Réserver</a></li>
+                <li><a href="#contact">Accès</a></li>
             </ul>
-            <div class="burger"><i class="fas fa-bars"></i></div>
+            <div class="burger"><i class="fa"></i></div>
         </nav>
 
         <section id="home">
-            <h1 style="font-size: 4.5rem; margin:0">Restau Mohamed</h1>
+            <h1 style="font-size: 4.5rem; margin:0">Restaurant Argana</h1>
             <p style="letter-spacing: 5px; color: var(--primary)">UNE EXPÉRIENCE INOUBLIABLE</p>
             <button class="dec-menu" style="width: auto; padding: 15px 40px; margin-top: 20px;"
                 onclick="window.location.href='#menu'">DÉCOUVRIR LE MENU</button>
@@ -194,5 +196,74 @@
                 <img src="https://imgs.search.brave.com/YGGguMuEIpfKVcPVugCfJNLDwTF2R_MvbzIWLHZ5ttQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9saDMu/Z29vZ2xldXNlcmNv/bnRlbnQuY29tL3Av/QUYxUWlwT3FpT0hL/Z19rZ0wwUzBIaTNY/TzBrekZCWHRTdjFQ/RkVxX3dNNWY9czE2/MDAtdzY0MA" alt="restaurant">
             </div>
         </section>
+        <section>
+            <div class="bg"></div>
+            <div class="review" id="reviewBox"></div>
+        </section>
+        <section id="reservation">
+            <h2>Réserver votre Table</h2>
+            <form id="resForm">
+                <input type="text" placeholder="Nom Complet" required>
+                <input type="email" placeholder="Email">
+                <select required>
+                    <option value="">Nombre de personnes</option>
+                    <option>1-2</option>
+                    <option>3-5</option>
+                    <option>6+</option>
+                </select>
+                <input type="date" required>
+                <button type="submit" class="dec-menu">RÉSERVER MAINTENANT</button>
+            </form>
+        </section>
+        <section id="contact">
+            <div class="bg"></div>
+            <h2 style="color: var(--primary)">Nous Trouver</h2>
+            <p style="margin-bottom: 20px;"><i class="loca"></i> Adresse : Place Jamaa El Fna, Marrakech 40000, Maroc </p>
+            <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3397.2640395691164!2d-7.992128925690876!3d31.626620241887274!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee425134aff7%3A0x3186f41bc78c5ae2!2sCaf%C3%A9%20Restaurant%20ARGANA!5e0!3m2!1sfr!2sma!4v1777607697223!5m2!1sfr!2sma" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <p style="margin-top: 20px;"><i class="num"></i> +212 6 28 26 54 79 </p>
+        </section>
+        <script>
+            // Fait défiler le menu tout seul pour un effet dynamique
+            const slider = document.getElementById('menuSlider');
+            setInterval(() => {
+                slider.scrollLeft += 1;
+                if (slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth)) {
+                    slider.scrollLeft = 0; // retour au debut
+                }
+            }, 30);
+            document.getElementById('resForm').onsubmit = function(e) {
+                e.preventDefault();
+                alert("🌟 Merci ! Votre demande de réservation a été reçue.");
+            };
+            // liste des avis pour afficher
+            const reviews = [
+                { stars: "★★★★★", text: "La meilleure expérience à Marrakech !", name: "Youssef", city: "Marrakech" },
+                { stars: "★★★★★", text: "Le tajine est une merveille.", name: "Fatima", city: "Casablanca" },
+                { stars: "★★★★☆", text: "Cadre magnifique et service rapide.", name: "Hamza", city: "Rabat" },
+                { stars: "★★★★☆", text: "L'ambiance est incroyable , j'aime ca" , name: "Hanane", city: "Tetouane"}
+            ];
+            let i = 0;
+            function rotateReview() {
+                const box = document.getElementById('reviewBox');
+                box.style.opacity = 0; // on cacher le commentaire
+                
+                setTimeout(() => {
+                    const r = reviews[i];
+                    box.innerHTML = `
+                        <span class="stars" style="color:var(--primary); display:block; margin-bottom:10px;">${r.stars}</span>
+                        "${r.text}"<br><br>
+                        <span style="color:var(--primary); font-weight:bold;">${r.name}</span><br>
+                        <small style="color:#aaa;"> ${r.city}</small>
+                    `;
+                    box.style.opacity = 1; // on réaffiche le commentaire
+                    i = (i + 1) % reviews.length;
+                }, 500);
+            }
+            // lancer la rotation toutes 4 sec
+            setInterval(rotateReview, 4000);
+            rotateReview(); // premier lancement immediat
+        </script>
     </body>
 </html>
