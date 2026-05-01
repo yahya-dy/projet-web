@@ -4,32 +4,35 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Restaurant Argana | Luxe & Saveurs</title>
+        
+       
         <style>
-            /* On definit les couleurs principale pour les réutiliser facilement partout au code*/
-            :root{
-                --primary: #ffcc00;
-                --dark: #0a0a0a;
-                --glass: rgba(255, 255, 255, 0.1);
-            }
+            /* --- VARIABLES ---
+               On définit les couleurs principales pour les réutiliser facilement partout */
+            :root {
+                --primary: #ffcc00; 
+                --dark: #0a0a0a;    
+                --glass: rgba(255, 255, 255, 0.1);            }
+
             /* Scroll fluide lors des clics sur le menu */
             html { scroll-behavior: smooth; }
-            body{
+
+            body {
                 margin: 0;
                 font-family: 'Poppins', sans-serif;
                 background-color: var(--dark);
                 color: white;
                 overflow-x: hidden;
-                  /* Scroll Snap : La page s'aimante aux sections lors du défilement */
+                /* Scroll Snap : La page s'aimante aux sections lors du défilement */
                 scroll-snap-type: y mandatory;
                 height: 100vh;
-
             }
-            nav{
-                position: fixed;
-                top: 0;
-                width: 100%;
+
+            nav {
+                position: fixed; /* Reste en haut au défilement */
+                top: 0; width: 100%;
                 background: rgba(0, 0, 0, 0.85);
-                backdrop-filter: blur(10px);
+                backdrop-filter: blur(10px); /* Flou derrière la barre */
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -38,42 +41,29 @@
                 z-index: 2000;
                 border-bottom: 1px solid rgba(255,204,0,0.3);
             }
+
+            .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+            .nav-links { display: flex; list-style: none; gap: 20px; }
+            .nav-links a {
+                color: white; text-decoration: none; font-size: 0.9rem;
+                text-transform: uppercase; transition: 0.3s;
+            }
+            .nav-links a:hover { color: var(--primary); }
+            .burger { display: none; cursor: pointer; font-size: 1.5rem; }
+
+            /* --- SECTIONS --- */
             section {
                 height: 100vh;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                scroll-snap-align: start;
+                scroll-snap-align: start; /* Cible pour l'aimantation du scroll */
                 padding: 80px 20px;
                 box-sizing: border-box;
                 position: relative;
             }
-            .logo{
-                 font-size: 1.5rem; 
-                 font-weight: bold; 
-                 color: var(--primary); 
-            }     
-            .nav-links{ 
-                display: flex; 
-                list-style: none; 
-                gap: 20px; 
-            }
-            .nav-links a{
-                color: white;
-                text-decoration: none;
-                font-size: 0.9rem;
-                text-transform: uppercase;
-                transition: 0.3s;
-            }
-            .nav-links a:hover{
-                color : var(--primary)
-            }
-            .burger{
-                 display: none; 
-                 cursor: pointer; 
-                 font-size: 1.5rem; 
-            }
+
             /* Superposition sombre sur les images de fond pour rendre le texte lisible */
             .bg {
                 position: absolute; top:0; left:0; width:100%; height:100%;
@@ -81,86 +71,45 @@
                 z-index: -1;
             }
 
-            #home{
-                height: 100vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                background: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1600') center/cover;
-            }
-            #menu{
-                padding: 80px 20px;
-                text-align: center;
-                background: #111;
-            }
+            /* Définition des fonds pour chaque section */
+            #home { background: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1600') center/cover; }
+            #menu { background: #111; }
             #gallery { background: #0a0a0a; }
             #reviews { background: url('https://images.unsplash.com/photo-1550966842-2849a220276c?auto=format&fit=crop&w=1600') center/cover; }
             #reservation { background: #151515; }
             #contact { background: url(‘https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZqBPYAbGS6_EsebFkZWlJ18lKr4IOmqez1g&s’) center/cover; }
 
-            .slider-container{
-                display: flex;
-                overflow-x: auto;
-                gap: 20px;
-                width: 90%;
-                padding: 20px;
-                scroll-behavior: smooth;
+            /* --- COMPOSANTS --- */
+            /* Slider horizontal pour le menu */
+            .slider-container {
+                display: flex; overflow-x: auto; gap: 20px; width: 90%;
+                padding: 20px; scroll-behavior: smooth;
             }
-            .slider-container::-webkit-scrollbar{
-                 display: none;
-            }
-            .card{
-                min-width: 280px;
-                background: var(--glass);
-                border-radius: 20px;
-                padding: 15px;
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255,255,255,0.1);
-                transition: 0.4s;
+            .slider-container::-webkit-scrollbar { display: none; } /* Cache la barre de défilement */
+
+            /* Cartes du menu avec effet de verre */
+            .card {
+                min-width: 280px; background: var(--glass);
+                border-radius: 20px; padding: 15px;
+                backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);
+                transition: 0.4s; text-align: center;
             }
             .card:hover { transform: scale(1.05); border-color: var(--primary); }
-            .card img{
-                width: 100%;
-                border-radius: 15px;
-                height: 180px;
-                object-fit: cover;
-            }
-            .dec-menu{
-                background: var(--primary);
-                color: black;
-                border: none;
-                cursor: pointer;
-                transition: 0.3s;
-               
-            }
-            .dec-menu {
-                padding: 15px;
-                width: 100%;
-                font-weight: bold;
-                border-radius: 8px;
-}
-            .dec-menu:hover { background: #e6b800; transform: translateY(-3px); }
-            
+            .card img { width: 100%; border-radius: 15px; height: 180px; object-fit: cover; }
+
+            /* Galerie en grille */
             .gal {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
                 gap: 15px;
                 width: 80%;
             }
-            .gal img {
-                width: 100%;
-                height: 150px;
-                object-fit: cover;
-                border-radius: 10px;
-                cursor: pointer;
-                filter: grayscale(0.3);
-                transition: 0.3s;
+            .galimg {
+                width: 100%; height: 150px; object-fit: cover;
+                border-radius: 10px; filter: grayscale(0.3); transition: 0.3s;
             }
-            .gal img:hover {
-                filter: grayscale(0);
-                transform: scale(1.1);
-            }
+            .galimg:hover { filter: grayscale(0); transform: scale(1.1); }
+
             /* Bulle d'avis */
             .review {
                 max-width: 600px; font-style: italic; font-size: 1.2rem;
@@ -175,24 +124,31 @@
                 border: 2px solid var(--primary);
                 box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
             }
+
             /* Formulaires et Boutons */
             form { background: white; padding: 40px; border-radius: 20px; width: 100%; max-width: 400px; color: #333; }
             input, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #ddd; }
-           
+            
+            .dec-menu {
+                background: var(--primary); color: black; border: none;
+                padding: 15px; width: 100%; font-weight: bold;
+                border-radius: 8px; cursor: pointer; transition: 0.3s;
+            }
+            .dec-menu:hover { background: #e6b800; transform: translateY(-3px); }
+
             /* Responsive pour mobile */
             @media (max-width: 768px) {
                 .nav-links { display: none; }
                 .burger { display: block; }
                 h1 { font-size: 2.5rem !important; }
             }
-
-
-
         </style>
     </head>
     <body>
+
+        <!-- Navigation -->
         <nav>
-            <div class="logo">Argana <span style="color:white">RESTAURANT</span></div>
+            <div class="logo">ARGANA <span style="color:white">RESTAURANT</span></div>
             <ul class="nav-links">
                 <li><a href="#home">Accueil</a></li>
                 <li><a href="#menu">Menu</a></li>
@@ -201,19 +157,23 @@
                 <li><a href="#reservation">Réserver</a></li>
                 <li><a href="#contact">Accès</a></li>
             </ul>
-            <div class="burger"><i class="fa"></i></div>
+            <div class="burger"><i class="fas fa-bars"></i></div>
         </nav>
 
+        <!-- SECTION 1 : ACCUEIL -->
         <section id="home">
             <div class="bg"></div>
-            <h1 style="font-size: 4.5rem; margin:0">Restaurant Argana</h1>
+            <h1 style="font-size: 4.5rem; margin:0">Restau Mohamed</h1>
             <p style="letter-spacing: 5px; color: var(--primary)">UNE EXPÉRIENCE INOUBLIABLE</p>
             <button class="dec-menu" style="width: auto; padding: 15px 40px; margin-top: 20px;"
                 onclick="window.location.href='#menu'">DÉCOUVRIR LE MENU</button>
         </section>
+
+        <!-- SECTION 2 : MENU (SLIDER) -->
         <section id="menu">
             <h2 style="color: var(--primary)">Notre Carte</h2>
             <div class="slider-container" id="menuSlider">
+                <!-- Les cartes sont répétées ici -->
                 <div class="card">
                     <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400" alt="Pizza">
                     <h3>Pizza Truffe</h3>
@@ -237,19 +197,27 @@
             </div>
             <p style="margin-top: 20px; font-size: 0.8rem; color: #888;">Glissez pour voir plus →</p>
         </section>
+
+        <!-- SECTION 3 : GALERIE -->
         <section id="gallery">
-            <h2>L'Ambiance de notre Restaurant</h2>
+            <h2>L'Ambiance</h2>
             <div class="gal">
-                <img src="https://imgs.search.brave.com/grQFkbre7gljyK8wBhA_5hYBuRL0bqBHh049Vx-p8bc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/bGFjYXJ0ZS5tZW51/L3N0b3JhZ2UvbWVk/aWEvY29tcGFueV9p/bWFnZXMvMzQ4NTY4/NzYvY29udmVyc2lv/bnMvdGh1bWJuYWls/LmpwZw" alt="restaurant">
-                <img src="https://imgs.search.brave.com/G7WF8m3oZ1SYJ6d1IePezjrsnr2UFh1LK4io-VHjLkg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9saDMu/Z29vZ2xldXNlcmNv/bnRlbnQuY29tL3Av/QUYxUWlwT3U2S0lI/b3I2Tm5sVmJZcTQ4/dFZMeEF5dzZpVEZ1/OFJ2VWxKb2M9czE2/MDAtdzY0MA" alt="restaurant">
-                <img src="https://imgs.search.brave.com/YGGguMuEIpfKVcPVugCfJNLDwTF2R_MvbzIWLHZ5ttQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9saDMu/Z29vZ2xldXNlcmNv/bnRlbnQuY29tL3Av/QUYxUWlwT3FpT0hL/Z19rZ0wwUzBIaTNY/TzBrekZCWHRTdjFQ/RkVxX3dNNWY9czE2/MDAtdzY0MA" alt="restaurant">
-                <img src="https://imgs.search.brave.com/YGGguMuEIpfKVcPVugCfJNLDwTF2R_MvbzIWLHZ5ttQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9saDMu/Z29vZ2xldXNlcmNv/bnRlbnQuY29tL3Av/QUYxUWlwT3FpT0hL/Z19rZ0wwUzBIaTNY/TzBrekZCWHRTdjFQ/RkVxX3dNNWY9czE2/MDAtdzY0MA" alt="restaurant">
+                <img class="galimg" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400" alt="Déco">
+                <img class="galimg" src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400" alt="Chef">
+                <img class="galimg" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400" alt="Table">
+                <img class="galimg" src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400" alt="Verre">
             </div>
         </section>
+
+        <!-- SECTION 4 : AVIS (TEXTE DYNAMIQUE) -->
         <section id="reviews">
-           <div class="bg"></div>
-           <div class="review" id="reviewBox"></div>
+            <div class="bg"></div>
+            <div class="review" id="reviewBox">
+                <!-- Le contenu est injecté via JavaScript -->
+            </div>
         </section>
+
+        <!-- SECTION 5 : RÉSERVATION -->
         <section id="reservation">
             <h2>Réserver votre Table</h2>
             <form id="resForm">
@@ -257,47 +225,59 @@
                 <input type="email" placeholder="Email">
                 <select required>
                     <option value="">Nombre de personnes</option>
-                    <option>1-2</option>
-                    <option>3-5</option>
-                    <option>6+</option>
+                    <option>1-2</option><option>3-5</option><option>6+</option>
                 </select>
                 <input type="date" required>
                 <button type="submit" class="dec-menu">RÉSERVER MAINTENANT</button>
             </form>
         </section>
+
+        <!-- SECTION 6 : NOUVELLE PAGE CONTACT & MAPS -->
         <section id="contact">
             <div class="bg"></div>
             <h2 style="color: var(--primary)">Nous Trouver</h2>
             <p style="margin-bottom: 20px;"><i class="loca"></i> Adresse : Place Jamaa El Fna, Marrakech 40000, Maroc </p>
+            
             <div class="map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3397.2640395691164!2d-7.992128925690876!3d31.626620241887274!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee425134aff7%3A0x3186f41bc78c5ae2!2sCaf%C3%A9%20Restaurant%20ARGANA!5e0!3m2!1sfr!2sma!4v1777607697223!5m2!1sfr!2sma" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <!-- Google Maps Embed -->
+                <iframe 
+                    src=" https://maps.app.goo.gl/PbDqyxny2wXVrbgN7" 
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
             </div>
+            
             <p style="margin-top: 20px;"><i class="num"></i> +212 6 28 26 54 79 </p>
         </section>
+
         <script>
+            // --- 1. AUTOMATISATION DU SLIDER MENU ---
             // Fait défiler le menu tout seul pour un effet dynamique
             const slider = document.getElementById('menuSlider');
             setInterval(() => {
                 slider.scrollLeft += 1;
                 if (slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth)) {
-                    slider.scrollLeft = 0; // retour au debut
+                    slider.scrollLeft = 0; // Revient au début
                 }
             }, 30);
+
+            // --- 2. GESTION DU FORMULAIRE ---
             document.getElementById('resForm').onsubmit = function(e) {
                 e.preventDefault();
                 alert("🌟 Merci ! Votre demande de réservation a été reçue.");
             };
-            // liste des avis pour afficher
+
+            // --- 3. SYSTÈME D'AVIS TOURNANTS ---
+            // Liste des avis à afficher
             const reviews = [
-                { stars: "★★★★★", text: "La meilleure expérience à Marrakech !", name: "Youssef", city: "Marrakech" },
-                { stars: "★★★★★", text: "Le tajine est une merveille.", name: "Fatima", city: "Casablanca" },
-                { stars: "★★★★☆", text: "Cadre magnifique et service rapide.", name: "Hamza", city: "Rabat" },
-                { stars: "★★★★☆", text: "L'ambiance est incroyable , j'aime ca" , name: "Hanane", city: "Tetouane"}
+                { stars: "★★★★★", text: "La meilleure expérience à Marrakech !", name: "Youssef El Alaoui", city: "Marrakech" },
+                { stars: "★★★★★", text: "Le tajine est une merveille.", name: "Fatima Zahra", city: "Casablanca" },
+                { stars: "★★★★☆", text: "Cadre magnifique et service rapide.", name: "Hamza Tazi", city: "Rabat" }
             ];
+
             let i = 0;
             function rotateReview() {
                 const box = document.getElementById('reviewBox');
-                box.style.opacity = 0; // on cacher le commentaire
+                box.style.opacity = 0; // On cache
                 
                 setTimeout(() => {
                     const r = reviews[i];
@@ -305,15 +285,16 @@
                         <span class="stars" style="color:var(--primary); display:block; margin-bottom:10px;">${r.stars}</span>
                         "${r.text}"<br><br>
                         <span style="color:var(--primary); font-weight:bold;">${r.name}</span><br>
-                        <small style="color:#aaa;"> ${r.city}</small>
+                        <small style="color:#aaa;">📍 ${r.city}</small>
                     `;
-                    box.style.opacity = 1; // on réaffiche le commentaire
+                    box.style.opacity = 1; // On réaffiche
                     i = (i + 1) % reviews.length;
                 }, 500);
             }
-            // lancer la rotation toutes 4 sec
+
+            // Lancer la rotation toutes les 4 secondes
             setInterval(rotateReview, 4000);
-            rotateReview(); // premier lancement immediat
+            rotateReview(); // Premier lancement immédiat
         </script>
     </body>
 </html>
