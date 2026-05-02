@@ -95,9 +95,9 @@
                 background: #111;
             }
             #gallery { background: #0a0a0a; }
-            #reviews { background: url('https://images.unsplash.com/photo-1550966842-2849a220276c?auto=format&fit=crop&w=1600') center/cover; }
-            #reservation { background: #151515; }
-            #contact { background: url(‘https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZqBPYAbGS6_EsebFkZWlJ18lKr4IOmqez1g&s’) center/cover; }
+            #reviews { background: url("https://images.unsplash.com/photo-1550966842-2849a220276c?auto=format&fit=crop&w=1600") center/cover; }
+            #reservation { background:var(--dark); }
+            #contact { background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZqBPYAbGS6_EsebFkZWlJ18lKr4IOmqez1g&s") center/cover; }
 
             .slider-container{
                 display: flex;
@@ -139,7 +139,7 @@
                 width: 100%;
                 font-weight: bold;
                 border-radius: 8px;
-}
+            }
             .dec-menu:hover { background: #e6b800; transform: translateY(-3px); }
             
             .gal {
@@ -185,9 +185,228 @@
                 .burger { display: block; }
                 h1 { font-size: 2.5rem !important; }
             }
+            /*la partie de l'Horaires*/
+            .horaires-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+                width: 85%;
+                max-width: 900px;
+                z-index: 1;
+            }
 
-
-
+            .horaires-title {
+                grid-column: 1 / -1;
+                text-align: center;
+            }
+            .horaires-title h2 {
+                font-family: 'Playfair Display', serif;
+                font-size: 2.5rem;
+                color: white;
+                margin: 0 0 5px 0;
+            }
+            .horaires-title p {
+                color: #888;
+                font-size: 0.85rem;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                margin: 0;
+            }
+            .horaire-card {
+                background: rgba(255,255,255,0.04);
+                border: 1px solid rgba(255,204,0,0.15);
+                border-radius: 20px;
+                padding: 28px;
+                position: relative;
+                overflow: hidden;
+                transition: 0.3s;
+            }
+            .horaire-card:hover {
+                border-color: rgba(255,204,0,0.4);
+                background: rgba(255,204,0,0.05);
+                transform: translateY(-4px);
+            }
+            .horaire-card::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 0;
+                width: 4px; height: 100%;
+                background: var(--primary);
+                border-radius: 4px 0 0 4px;
+            }
+            .day {
+                font-size: 0.7rem;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                color: var(--primary);
+                margin-bottom: 10px;
+            }
+            .name {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.3rem;
+                color: white;
+                margin-bottom: 16px;
+            }
+            .ssf {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 0;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+                font-size: 0.83rem;
+            }
+            .ssf:last-child {
+                 border-bottom: none; 
+            }
+            .lab {
+                color: #999; 
+            }
+            .time {
+                color: white;
+                font-weight: 500;
+                background: rgba(255,204,0,0.1);
+                padding: 3px 10px;
+                border-radius: 20px;
+                font-size: 0.78rem;
+            }
+            .time.closed {
+                color: #ff6b6b;
+                background: rgba(255,107,107,0.1);
+            }
+            .open {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                padding: 6px 14px;
+                border-radius: 20px;
+                font-size: 0.75rem;
+                font-weight: 600;
+                margin-bottom: 8px;
+                background: rgba(0,200,100,0.15);
+                color: #00c864;
+                border: 1px solid rgba(0,200,100,0.3);
+            }
+            .open::before {
+                content: '';
+                width: 7px; height: 7px;
+                border-radius: 50%;
+                background: #00c864;
+                animation: blink 1.5s infinite;
+            }
+            @keyframes blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.3; }
+            }
+            .horaires-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+                width: 85%;
+                max-width: 900px;
+                z-index: 1;
+            }
+            .horaires-title {
+                grid-column: 1 / -1;
+                text-align: center;
+            }
+            .horaires-title h2 {
+                font-family: 'Playfair Display', serif;
+                font-size: 2.5rem;
+                color: white;
+                margin: 0 0 5px 0;
+            }
+            .horaires-title p {
+                color: #888;
+                font-size: 0.85rem;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                margin: 0;
+            }
+            .horaire-card {
+                background: rgba(255,255,255,0.04);
+                border: 1px solid rgba(255,204,0,0.15);
+                border-radius: 20px;
+                padding: 28px;
+                position: relative;
+                overflow: hidden;
+                transition: 0.3s;
+            }
+            .horaire-card:hover {
+                border-color: rgba(255,204,0,0.4);
+                background: rgba(255,204,0,0.05);
+                transform: translateY(-4px);
+            }
+            .horaire-card::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 0;
+                width: 4px; height: 100%;
+                background: var(--primary);
+                border-radius: 4px 0 0 4px;
+            }
+            .day {
+                font-size: 0.7rem;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                color: var(--primary);
+                margin-bottom: 10px;
+            }
+            .name {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.3rem;
+                color: white;
+                margin-bottom: 16px;
+            }
+            .ssf {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 0;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+                font-size: 0.83rem;
+            }
+            .ssf:last-child {
+                border-bottom: none; 
+            }
+            .lab { 
+                color: #999; 
+            }
+            .time {
+                color: white;
+                font-weight: 500;
+                background: rgba(255,204,0,0.1);
+                padding: 3px 10px;
+                border-radius: 20px;
+                font-size: 0.78rem;
+            }
+            .time.closed {
+                color: #ff6b6b;
+                background: rgba(255,107,107,0.1);
+            }
+            .open {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                padding: 6px 14px;
+                border-radius: 20px;
+                font-size: 0.75rem;
+                font-weight: 600;
+                margin-bottom: 8px;
+                background: rgba(0,200,100,0.15);
+                color: #00c864;
+                border: 1px solid rgba(0,200,100,0.3);
+            }
+            .open::before {
+                content: '';
+                width: 7px; height: 7px;
+                border-radius: 50%;
+                background: #00c864;
+                animation: blink 1.5s infinite;
+            }
+            @keyframes blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.3; }
+            }
         </style>
     </head>
     <body>
@@ -197,8 +416,8 @@
                 <li><a href="#home">Accueil</a></li>
                 <li><a href="#menu">Menu</a></li>
                 <li><a href="#gallery">Galerie</a></li>
-                <li><a href="#reviews">Avis</a></li>
                 <li><a href="#horaires">Horaires</a></li>
+                <li><a href="#reviews">Avis</a></li>
                 <li><a href="#reservation">Réserver</a></li>
                 <li><a href="#contact">Accès</a></li>
             </ul>
